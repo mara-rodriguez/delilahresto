@@ -1,0 +1,661 @@
+openapi: 3.0.0
+info:
+  title: Delilah Resto
+  description: "Rutas para el CRUD de productos.\nRegistro y login de usuarios.\nCreacion del usuario administrador. \nCreacion y cambio de estado de pedidos."
+  contact: {}
+  version: '1.0'
+servers:
+- url: http://localhost:3000
+  variables: {}
+paths:
+  /users/register:
+    post:
+      tags:
+      - Usuarios
+      summary: Crear Administrrador
+      operationId: CrearAdministrrador
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CrearAdministrradorRequest'
+            example:
+              username: admin
+              name: admin
+              lastname: admin
+              email: admin@delilahresto.com
+              phone: 341341652
+              address: Calle Resto 123
+              password: S3crEt*
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+        400:
+          description: Bad Request
+      deprecated: false
+  /users/login:
+    post:
+      tags:
+      - Usuarios
+      summary: Login
+      operationId: Login
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+            example:
+              username: '....'
+              password: '....'
+        required: true
+      responses:
+        200:
+          description: ''
+          headers:
+            X-Powered-By:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Express
+            Content-Length:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 168
+            ETag:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: W/"a8-iIMWu5Z7AW1ijar1XHSOKaDhQmY"
+            Date:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Sun, 10 May 2020 22:24:36 GMT
+            Connection:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: keep-alive
+          content:
+            text/html; charset=utf-8:
+              schema:
+                type: string
+                example: 'Tu token es: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hcml0YSIsInJvbGUiOiJub2FkbWluIiwiaWF0IjoxNTg5MTQ5NDc2fQ.J3An2sgoqHuswgGNCdatN0TNwPEHxhjaDJC1qWtdBvk'
+              example: 'Tu token es: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hcml0YSIsInJvbGUiOiJub2FkbWluIiwiaWF0IjoxNTg5MTQ5NDc2fQ.J3An2sgoqHuswgGNCdatN0TNwPEHxhjaDJC1qWtdBvk'
+      deprecated: false
+  /users:
+    put:
+      tags:
+      - Usuarios
+      summary: Modificar datos
+      operationId: Modificardatos
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModificardatosRequest'
+            example:
+              username: '...'
+              name: '...'
+              lastname: '...'
+              email: '...'
+              phone: '...'
+              address: '...'
+              password: '....'
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+    get:
+      tags:
+      - Usuarios
+      summary: Listado de usuarios
+      operationId: Listadodeusuarios
+      parameters: []
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+  /userdata:
+    get:
+      tags:
+      - Usuarios
+      summary: Datos de usuario
+      operationId: Datosdeusuario
+      parameters: []
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+  /products:
+    get:
+      tags:
+      - Productos
+      summary: Listado de productos
+      operationId: Listadodeproductos
+      parameters: []
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+    post:
+      tags:
+      - Productos
+      summary: Nuevo producto
+      operationId: Nuevoproducto
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NuevoproductoRequest'
+            example:
+              name: '...'
+              description: '...'
+              cost: '...'
+              image: '...'
+        required: true
+      responses:
+        201:
+          description: ''
+          headers:
+            X-Powered-By:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Express
+            Content-Length:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 76
+            ETag:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: W/"4c-hMVDiyKb8KDepks2WSOTkSbTTbo"
+            Date:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Sun, 10 May 2020 23:07:18 GMT
+            Connection:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: keep-alive
+          content:
+            application/json; charset=utf-8:
+              schema:
+                $ref: '#/components/schemas/Nuevoproducto%28existoso%29'
+              example:
+                name: sandwich
+                description: cheese
+                cost: 5.00
+                image: ' '
+                id: 11
+      deprecated: false
+  /products/{id}:
+    put:
+      tags:
+      - Productos
+      summary: Modificar producto
+      description: Enviar solo dato a modificar
+      operationId: Modificarproducto
+      parameters:
+      - name: id
+        in: path
+        description: id example
+        required: true
+        style: simple
+        schema:
+          type: integer
+          format: int32
+          example: 1
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ModificarproductoRequest'
+            example:
+              name: '...'
+              description: '...'
+              cost: '...'
+              image: '...'
+        required: true
+      responses:
+        200:
+          description: ''
+          headers:
+            X-Powered-By:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Express
+            Content-Length:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 18
+            ETag:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: W/"12-dqwreJ2PIFV3dCNKT+ltTd9g4Xo"
+            Date:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Sun, 10 May 2020 23:15:46 GMT
+            Connection:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: keep-alive
+          content:
+            text/html; charset=utf-8:
+              schema:
+                type: string
+                example: deleted successful
+              example: deleted successful
+        401:
+          description: Unauthorized
+      deprecated: false
+  /orders:
+    post:
+      tags:
+      - Pedidos
+      summary: Realizar pedido
+      operationId: Realizarpedido
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RealizarpedidoRequest'
+            example:
+              user: '...'
+              paymentMethod: '...'
+              detail:
+              - prod_id: '...'
+                cant: '...'
+              - prod_id: '...'
+                cant: '...'
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+    get:
+      tags:
+      - Pedidos
+      summary: Listado de pedidos
+      operationId: Listadodepedidos
+      parameters: []
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+  /orders/{id}:
+    put:
+      tags:
+      - Pedidos
+      summary: Estado de pedido
+      operationId: Estadodepedido
+      parameters:
+      - name: id
+        in: path
+        description: example
+        required: true
+        style: simple
+        schema:
+          type: integer
+          format: int32
+          example: 1
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EstadodepedidoRequest'
+            example:
+              status: cancel
+        required: true
+      responses:
+        200:
+          description: ''
+          headers:
+            X-Powered-By:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Express
+            Content-Length:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 18
+            ETag:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: W/"12-GhMA7pNmLrRf1zEOCJcW4TMaQ90"
+            Date:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Sun, 10 May 2020 23:20:15 GMT
+            Connection:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: keep-alive
+          content:
+            text/html; charset=utf-8:
+              schema:
+                type: string
+                example: Updated successful
+              example: Updated successful
+        401:
+          description: Unauthorized
+      deprecated: false
+components:
+  schemas:
+    CrearAdministrradorRequest:
+      title: CrearAdministrradorRequest
+      required:
+      - username
+      - name
+      - lastname
+      - email
+      - phone
+      - address
+      - password
+      type: object
+      properties:
+        username:
+          type: string
+        name:
+          type: string
+        lastname:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        address:
+          type: string
+        password:
+          type: string
+      example:
+        username: admin
+        name: admin
+        lastname: admin
+        email: admin@delilahresto.com
+        phone: 341341652
+        address: Calle Resto 123
+        password: S3crEt*
+    RegistrodeusuariosRequest:
+      title: RegistrodeusuariosRequest
+      required:
+      - username
+      - name
+      - lastname
+      - email
+      - phone
+      - address
+      - password
+      type: object
+      properties:
+        username:
+          type: string
+        name:
+          type: string
+        lastname:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        address:
+          type: string
+        password:
+          type: string
+      example:
+        username: '...'
+        name: '...'
+        lastname: '...'
+        email: '...'
+        phone: '...'
+        address: '...'
+        password: '....'
+    LoginRequest:
+      title: LoginRequest
+      required:
+      - username
+      - password
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      example:
+        username: '....'
+        password: '....'
+    ModificardatosRequest:
+      title: ModificardatosRequest
+      required:
+      - username
+      - name
+      - lastname
+      - email
+      - phone
+      - address
+      - password
+      type: object
+      properties:
+        username:
+          type: string
+        name:
+          type: string
+        lastname:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        address:
+          type: string
+        password:
+          type: string
+      example:
+        username: '...'
+        name: '...'
+        lastname: '...'
+        email: '...'
+        phone: '...'
+        address: '...'
+        password: '....'
+    NuevoproductoRequest:
+      title: NuevoproductoRequest
+      required:
+      - name
+      - description
+      - cost
+      - image
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        cost:
+          type: string
+        image:
+          type: string
+      example:
+        name: '...'
+        description: '...'
+        cost: '...'
+        image: '...'
+    Nuevoproducto(existoso):
+      title: Nuevoproducto(existoso)
+      required:
+      - name
+      - description
+      - cost
+      - image
+      - id
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        cost:
+          type: string
+        image:
+          type: string
+        id:
+          type: integer
+          format: int32
+      example:
+        name: sandwich
+        description: cheese
+        cost: 5.00
+        image: ' '
+        id: 11
+    ModificarproductoRequest:
+      title: ModificarproductoRequest
+      required:
+      - name
+      - description
+      - cost
+      - image
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        cost:
+          type: string
+        image:
+          type: string
+      example:
+        name: '...'
+        description: '...'
+        cost: '...'
+        image: '...'
+    EliminarproductosRequest:
+      title: EliminarproductosRequest
+      required:
+      - status
+      type: object
+      properties:
+        status:
+          type: string
+      example:
+        status: inactive
+    RealizarpedidoRequest:
+      title: RealizarpedidoRequest
+      required:
+      - user
+      - paymentMethod
+      - detail
+      type: object
+      properties:
+        user:
+          type: string
+        paymentMethod:
+          type: string
+        detail:
+          type: array
+          items:
+            $ref: '#/components/schemas/Detail'
+          description: ''
+      example:
+        user: '...'
+        paymentMethod: '...'
+        detail:
+        - prod_id: '...'
+          cant: '...'
+        - prod_id: '...'
+          cant: '...'
+    Detail:
+      title: Detail
+      required:
+      - prod_id
+      - cant
+      type: object
+      properties:
+        prod_id:
+          type: string
+        cant:
+          type: string
+      example:
+        prod_id: '...'
+        cant: '...'
+    EstadodepedidoRequest:
+      title: EstadodepedidoRequest
+      required:
+      - status
+      type: object
+      properties:
+        status:
+          type: string
+      example:
+        status: cancel
+  securitySchemes:
+    httpBearer:
+      type: http
+      scheme: bearer
+security:
+- httpBearer: []
+tags:
+- name: Usuarios
+  description: Registro, login, logout y modificaciones
+- name: Productos
+  description: CRUD de productos
+- name: Pedidos
+  description: 'Gestion de pedios: Creación y cambio de estado'

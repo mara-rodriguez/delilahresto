@@ -1,7 +1,7 @@
-const { root, password, sever, port, db_name } = require('../configuration/database-config')
+const { root, password, server, port, db_name } = require('../configuration/database-config')
 
 const Sequelize = require ('sequelize');
-const sequelize = new Sequelize (`mysql://${root}:${password}@${sever}:${port}/${db_name}`);
+const sequelize = new Sequelize (`mysql://${root}:${password}@${server}:${port}/${db_name}`);
 
 
 

@@ -25,15 +25,19 @@ router.post('/users/register', (req, res) => {
 
 
 router.post('/users/login', async (req, res) => {
-    const user = await repository.getUser(req.body.username, req.body.password);
-    console.log(user);
+    try{
+        const user = await repository.getUser(req.body.username, req.body.password);
+        console.log(user);
+        if(user != "") {
+            const jsonUser = JSON.parse(JSON.stringify(user));
+            const token = jwt.sign(jsonUser, configuration.jwtSign);
+            res.status(200).send(`Tu token es: ${token}`)
+            } 
+            else {  res.status(401).send('Invalid user');   }
+        } catch(error) {
+            res.status(401).send(error);
+        }
 
-    if(user != "") {
-        const jsonUser = JSON.parse(JSON.stringify(user[0]));
-        const token = jwt.sign(jsonUser, configuration.jwtSign);
-        res.status(200).send(`Tu token es: ${token}`)
-        } 
-        else res.status(401).send('Invalid user'); 
 });
 
 

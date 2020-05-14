@@ -57,9 +57,8 @@ function getOrderById(id) {
 
 
 function deleteOrder(id) {
-    sequelize.query(`UPDATE products SET removed = 1 WHERE id = ${id}`,
-    { type: sequelize.QueryTypes.SELECT }
-    ).then(results => results)
+    sequelize.query(`UPDATE orders SET removed = 1 WHERE id = ${id}`,
+    { type: sequelize.QueryTypes.SELECT })
 }
 
 

@@ -33,11 +33,10 @@ router.post('/products', intercept.userAuthentication, intercept.userAdmin, asyn
 
 
 //DELETE
-router.put('/products/:productID', intercept.userAuthentication, intercept.userAdmin, (req, res) => { 
+router.delete('/products/:productID', intercept.userAuthentication, intercept.userAdmin, (req, res) => { 
     try {
         const id = req.params.productID;
-        const status = req.body;
-        repository.removeProduct(id, status);
+        repository.removeProduct(id);
         res.status(200).send('deleted successful');
     } catch {
         res.status(400).send('Ups! Missing data')

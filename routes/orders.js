@@ -17,13 +17,6 @@ const intercept = require('../middlewares/authentication');
 
 
 
-router.get('/products', intercept.userAuthentication, (req, res) => { 
-    productsRepository.getProducts()
-    .then(result => res.json(result));
-});
-
-
-
 router.post('/orders', intercept.userAuthentication, async (req, res) => {
 
     var amount = 0;
@@ -37,7 +30,7 @@ router.post('/orders', intercept.userAuthentication, async (req, res) => {
 
         var user = await usersRepository.getUserByUsername(order.user);
     
-        //order.detail.forEach(async product => {
+    
         for (let i = 0; i < order.detail.length; i++) {
             const product = order.detail[i];
             var p = await productsRepository.getProductById(product.prod_id);
@@ -62,8 +55,6 @@ router.get('/orders',  intercept.userAuthentication, async (req, res) => {
     const token = req.headers.authorization.split(' ')[1];
     const tokenVerify = jwt.verify(token, configuration.jwtSign);
     const orders = await repository.getOrdersByUsername(tokenVerify.username, tokenVerify.role);
-    console.log(tokenVerify.username);
-    console.log(orders);
     res.json({ orders });
 }); 
 
@@ -79,6 +70,18 @@ router.put('/orders/:orderID', intercept.userAuthentication, intercept.userAdmin
         res.status(400).send('Ups! Missing data')
     }
 }); 
+
+
+router.delete('/orders/:orderID', intercept.userAuthentication, intercept.userAdmin, (req, res) => { 
+    try {
+        const id = req.params.orderID;
+        repository.deleteOrder(id);
+        res.status(200).send('Deleted successfully');
+    } catch {
+        res.status(400).send('Ups! Missing data')
+    }
+}); 
+
 
 
 

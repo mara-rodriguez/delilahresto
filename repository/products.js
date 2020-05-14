@@ -1,17 +1,17 @@
-const root = 'root';
-const password = 'admin';
-const port = '3306';
-
+const { root, password, server, port, db_name } = require('../configuration/database-config')
 
 const Sequelize = require ('sequelize');
-const sequelize = new Sequelize (`mysql://${root}:${password}@localhost:${port}/delilah`);
+const sequelize = new Sequelize (`mysql://${root}:${password}@${server}:${port}/${db_name}`);
+
 
 
 function getProducts() {
-    const products = sequelize.query('SELECT * FROM products', 
+    const products = sequelize.query('SELECT * FROM products WHERE removed = 0', 
     { type: Sequelize.QueryTypes.SELECT });
     return products;
 } 
+
+
 
 async function getProductById(id) {
     const prod = await sequelize.query(`SELECT * FROM products WHERE id = '${id}'`, 
@@ -30,9 +30,9 @@ async function addProduct(product) {
 }
 
 
-function removeProduct(id, status) {
-    sequelize.query(`UPDATE products SET status ='${status.status}' WHERE id = ${id}`,
-    { replacements: [`${status.status}`], type: sequelize.QueryTypes.SELECT }
+function removeProduct(id) {
+    sequelize.query(`UPDATE products SET removed = 1 WHERE id = ${id}`,
+    { type: sequelize.QueryTypes.SELECT }
     ).then(results => results)
 }
 

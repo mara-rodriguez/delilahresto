@@ -12,31 +12,98 @@ paths:
     post:
       tags:
       - Usuarios
-      summary: Crear Administrrador
-      operationId: CrearAdministrrador
+      summary: Registro de usuarios
+      operationId: Registrodeusuarios
       parameters: []
       requestBody:
         description: ''
         content:
-          application/json:
+          text/plain:
             schema:
-              $ref: '#/components/schemas/CrearAdministrradorRequest'
-            example:
-              username: admin
-              name: admin
-              lastname: admin
-              email: admin@delilahresto.com
-              phone: 341341652
-              address: Calle Resto 123
-              password: S3crEt*
+              type: string
+              example: >-
+                {
+
+                	"username": "...",
+
+                	"name": "...",
+
+                	"lastname": "...",
+
+                	"email": "...",
+
+                	"phone": "...",
+
+                	"address": "...",
+
+                	"password": "...."
+
+                	"role": "..."
+
+                }
+            example: >-
+              {
+
+              	"username": "...",
+
+              	"name": "...",
+
+              	"lastname": "...",
+
+              	"email": "...",
+
+              	"phone": "...",
+
+              	"address": "...",
+
+              	"password": "...."
+
+              	"role": "..."
+
+              }
         required: true
       responses:
-        200:
+        201:
           description: ''
-          headers: {}
-        400:
-          description: Bad Request
+          headers:
+            X-Powered-By:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Express
+            Content-Length:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 20
+            ETag:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: W/"14-rTgaE82JxkI35aXXwabsTvICgoI"
+            Date:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Sun, 10 May 2020 21:57:46 GMT
+            Connection:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: keep-alive
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: string
+                example: '"Yay! User Created!"'
+              example: '"Yay! User Created!"'
       deprecated: false
+      security: []
   /users/login:
     post:
       tags:
@@ -95,13 +162,23 @@ paths:
                 example: 'Tu token es: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hcml0YSIsInJvbGUiOiJub2FkbWluIiwiaWF0IjoxNTg5MTQ5NDc2fQ.J3An2sgoqHuswgGNCdatN0TNwPEHxhjaDJC1qWtdBvk'
               example: 'Tu token es: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1hcml0YSIsInJvbGUiOiJub2FkbWluIiwiaWF0IjoxNTg5MTQ5NDc2fQ.J3An2sgoqHuswgGNCdatN0TNwPEHxhjaDJC1qWtdBvk'
       deprecated: false
-  /users:
+      security: []
+  /users/{id}:
     put:
       tags:
       - Usuarios
       summary: Modificar datos
       operationId: Modificardatos
-      parameters: []
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: integer
+          format: int32
+          example: 12
       requestBody:
         description: ''
         content:
@@ -122,12 +199,28 @@ paths:
           description: ''
           headers: {}
       deprecated: false
-    get:
+    delete:
       tags:
       - Usuarios
-      summary: Listado de usuarios
-      operationId: Listadodeusuarios
-      parameters: []
+      summary: Eliminar usuario
+      operationId: Eliminarusuario
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EliminarusuarioRequest'
+            example:
+              removed: 1
+        required: true
       responses:
         200:
           description: ''
@@ -139,6 +232,18 @@ paths:
       - Usuarios
       summary: Datos de usuario
       operationId: Datosdeusuario
+      parameters: []
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+  /users:
+    get:
+      tags:
+      - Usuarios
+      summary: Listado de usuarios
+      operationId: Listadodeusuarios
       parameters: []
       responses:
         200:
@@ -292,6 +397,73 @@ paths:
         401:
           description: Unauthorized
       deprecated: false
+    delete:
+      tags:
+      - Productos
+      summary: Eliminar productos
+      operationId: Eliminarproductos
+      parameters:
+      - name: id
+        in: path
+        description: example
+        required: true
+        style: simple
+        schema:
+          type: integer
+          format: int32
+          example: 1
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EliminarproductosRequest'
+            example:
+              removed: 1
+        required: true
+      responses:
+        200:
+          description: ''
+          headers:
+            X-Powered-By:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Express
+            Content-Length:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 18
+            ETag:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: W/"12-dqwreJ2PIFV3dCNKT+ltTd9g4Xo"
+            Date:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Sun, 10 May 2020 23:17:57 GMT
+            Connection:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: keep-alive
+          content:
+            text/html; charset=utf-8:
+              schema:
+                type: string
+                example: deleted successful
+              example: deleted successful
+        401:
+          description: Unauthorized
+      deprecated: false
   /orders:
     post:
       tags:
@@ -398,76 +570,35 @@ paths:
         401:
           description: Unauthorized
       deprecated: false
+    delete:
+      tags:
+      - Pedidos
+      summary: Eliminar pedido
+      operationId: Eliminarpedido
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        style: simple
+        schema:
+          type: string
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EliminarpedidoRequest'
+            example:
+              removed: 1
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
 components:
   schemas:
-    CrearAdministrradorRequest:
-      title: CrearAdministrradorRequest
-      required:
-      - username
-      - name
-      - lastname
-      - email
-      - phone
-      - address
-      - password
-      type: object
-      properties:
-        username:
-          type: string
-        name:
-          type: string
-        lastname:
-          type: string
-        email:
-          type: string
-        phone:
-          type: string
-        address:
-          type: string
-        password:
-          type: string
-      example:
-        username: admin
-        name: admin
-        lastname: admin
-        email: admin@delilahresto.com
-        phone: 341341652
-        address: Calle Resto 123
-        password: S3crEt*
-    RegistrodeusuariosRequest:
-      title: RegistrodeusuariosRequest
-      required:
-      - username
-      - name
-      - lastname
-      - email
-      - phone
-      - address
-      - password
-      type: object
-      properties:
-        username:
-          type: string
-        name:
-          type: string
-        lastname:
-          type: string
-        email:
-          type: string
-        phone:
-          type: string
-        address:
-          type: string
-        password:
-          type: string
-      example:
-        username: '...'
-        name: '...'
-        lastname: '...'
-        email: '...'
-        phone: '...'
-        address: '...'
-        password: '....'
     LoginRequest:
       title: LoginRequest
       required:
@@ -516,6 +647,17 @@ components:
         phone: '...'
         address: '...'
         password: '....'
+    EliminarusuarioRequest:
+      title: EliminarusuarioRequest
+      required:
+      - removed
+      type: object
+      properties:
+        removed:
+          type: integer
+          format: int32
+      example:
+        removed: 1
     NuevoproductoRequest:
       title: NuevoproductoRequest
       required:
@@ -590,13 +732,14 @@ components:
     EliminarproductosRequest:
       title: EliminarproductosRequest
       required:
-      - status
+      - removed
       type: object
       properties:
-        status:
-          type: string
+        removed:
+          type: integer
+          format: int32
       example:
-        status: inactive
+        removed: 1
     RealizarpedidoRequest:
       title: RealizarpedidoRequest
       required:
@@ -646,6 +789,17 @@ components:
           type: string
       example:
         status: cancel
+    EliminarpedidoRequest:
+      title: EliminarpedidoRequest
+      required:
+      - removed
+      type: object
+      properties:
+        removed:
+          type: integer
+          format: int32
+      example:
+        removed: 1
   securitySchemes:
     httpBearer:
       type: http

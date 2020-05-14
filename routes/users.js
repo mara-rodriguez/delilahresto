@@ -44,12 +44,39 @@ router.get('/users', intercept.userAdmin, (req, res) => {
 });
 
 
+
 router.get('/userdata', intercept.userAuthentication, async (req, res) => {
     const token = req.headers.authorization.split(' ')[1];
     const tokenVerify = jwt.verify(token, configuration.jwtSign);
     const username = await repository.getUserByUsername(tokenVerify.username);
     res.json({ username });
 })
-/*MUST HAVE: LOGOUT?*/
+
+
+router.put('/users/:usersID', intercept.userAuthentication, intercept.userAdmin, (req, res) => {
+    try {
+        const id = req.params.usersID
+        const user = req.body;
+        repository.alterUser(id, user);
+        res.status(201).send('Updated successful');
+    } catch {
+        res.status(400).send('Ups! Missing data')
+    }
+});
+
+
+
+
+router.delete('/users/:usersID', intercept.userAuthentication, intercept.userAdmin, (req, res) => { 
+    try {
+        const id = req.params.usersID;
+        repository.removeUser(id);
+        res.status(200).send('deleted successful');
+    } catch {
+        res.status(400).send('Ups! Missing data')
+    }
+});
+
+
 
 module.exports = router;

@@ -1,10 +1,7 @@
-const root = 'root';
-const password = 'admin';
-const port = '3306';
-
+const { root, password, sever, port, db_name } = require('../configuration/database-config')
 
 const Sequelize = require ('sequelize');
-const sequelize = new Sequelize (`mysql://${root}:${password}@localhost:${port}/delilah`);
+const sequelize = new Sequelize (`mysql://${root}:${password}@${sever}:${port}/${db_name}`);
 
 
 
@@ -59,4 +56,11 @@ function getOrderById(id) {
 } 
 
 
-module.exports = { alterStatus, insertOrder, getOrdersByUsername, getOrderById };
+function deleteOrder(id) {
+    sequelize.query(`UPDATE products SET removed = 1 WHERE id = ${id}`,
+    { type: sequelize.QueryTypes.SELECT }
+    ).then(results => results)
+}
+
+
+module.exports = { alterStatus, insertOrder, getOrdersByUsername, getOrderById, deleteOrder };

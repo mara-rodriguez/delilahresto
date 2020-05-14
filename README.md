@@ -22,15 +22,14 @@ Los clientes contaran con un sistema de registro y login para realizar sus pedid
       <ul>
         <li>Descargar e instalar MySql</li>
        <li>Crear una nueva base de datos con el contenido del archivo “database-init”.</li>
-       <li>Para conectarte con la base de datos:</li>
-       <li>Reemplazá los valores asignados por los de tu base de datos. (También podes usar los perdeterminados). Los mismos se encuentran en:<br><code>/configuration/configuration.js</code></li>
+       <li>Para conectarte con la base de datos, reemplazá los valores asignados por los de tu base de datos o utilizá los perdeterminados. Los mismos se encuentran en:<br><code>/configuration/configuration.js</code></li>
       </ul>
   <li>Los roles se asignan al momento de la creación. Si no fuesen asignados, por defecto se generará "noadmin"</li>
   <li>Por último, para utilizar la app, iniciá: <br><code>nodemon index.js</code></li>
 </ol>
 
 
-<h5>Recordá descargar el directorio de Postman para utilizar la app.</h5>
+<h5>Recordá descargar el directorio de Postman.</h5>
 https://www.postman.com/collections/0be9329d2b64f48ef2b6 <br>
 ¡TODO LISTO! YA PODES COMENZAR
 <p>

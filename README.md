@@ -30,7 +30,7 @@ Los clientes contaran con un sistema de registro y login para realizar sus pedid
 
 
 <h5>Recordá descargar el directorio de Postman.</h5>
-https://www.postman.com/collections/0be9329d2b64f48ef2b6
+https://www.getpostman.com/collections/0be9329d2b64f48ef2b6
 <p>
   <br>
   <br>

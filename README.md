@@ -15,7 +15,8 @@ Los clientes contaran con un sistema de registro y login para realizar sus pedid
 <h3>Instalación e inicialización</h3> 
 <ol>
   <li> Clonar repositorio: <br>https://github.com/mara-rodriguez/delilahresto.git</li>
-  <li>Instalar tu editor de código y Nodejs. Una vez en la consola, las dependencias a instalar son las siguientes: npm i express jsonwebtoken body-parser mysql2 sequelize </li>
+  <li>Instalar tu editor de código y Nodejs. Una vez en la consola, las dependencias a instalar son las siguientes:</li>
+  <code>npm i express jsonwebtoken body-parser mysql2 sequelize</code>
   <li>Descargar e instalar MySql</li>
   <li>Crear una nueva base de datos con el contenido del archivo “database-init”.</li>
   <li>Usuario administrador: Para crearlo, utilizar la ruta POST de administrador del directorio de Postman</li>
